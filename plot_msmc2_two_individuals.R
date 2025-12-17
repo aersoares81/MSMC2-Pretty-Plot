@@ -11,7 +11,14 @@ library(scales)
 mu <- 1.5e-8 
 gen <- 1    
 
-prepare_data <- function(file_path, pop_name) {
+# This will get the name of the population/species automatically
+# It will remove the .txt from the file name and assume the rest is the name of
+# the population/species.
+prepare_data <- function(file_path) {
+  # Automatically extract the filename without the directory or extension
+  # e.g., "data/Yoruba.txt" becomes "Yoruba"
+  pop_name <- gsub(".txt$", "", basename(file_path))
+  
   df <- read.table(file_path, header = TRUE)
   df <- df[df$left_time_boundary > 0, ]
   
@@ -23,8 +30,8 @@ prepare_data <- function(file_path, pop_name) {
 }
 
 # Load both populations/species. These are placeholder results that I used to create the example plots
-pop1 <- prepare_data("PUN-Y-BCRD.results.txt", "Population A")
-pop2 <- prepare_data("PUN-R-JMC.results.txt", "Population B")
+pop1 <- prepare_data("PUN-Y-BCRD.txt")
+pop2 <- prepare_data("PUN-R-JMC.txt")
 
 # Combine into one data frame
 combined_data <- rbind(pop1, pop2)
@@ -75,8 +82,9 @@ p <- ggplot(combined_data, aes(x = t_years, y = Ne, color = Population)) +
 # This can crop the plot if not careful
   scale_y_continuous(limits = c(0, 500000), labels = scales::comma) +
   
-  # Color palette -- you can google other nice color combinations
-  scale_color_manual(values = c("Population A" = "firebrick", "Population B" = "dodgerblue4")) +
+  # Color palette -- you can google other nice color combinations/palettes
+  # This way, if you add more populations/species, it will automatically assign colors to them
+  scale_color_brewer(palette = "Set1") +
   
   labs(
     title = "Comparative Demographic History",
