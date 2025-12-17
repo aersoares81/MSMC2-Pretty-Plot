@@ -8,7 +8,7 @@ This was designed for plotting the results of a single individual, or the compar
 The example plots are for populations of the monkeyflower *Diplacus puniceus*.
 
 ### Single individual plot
-![Single species/population plot](https://github.com/aersoares81/MSMC2-Pretty-Plot/blob/main/PUN-Y-BCRD_MSMC2_plot.png)
+![Single species/population plot](https://github.com/aersoares81/MSMC2-Pretty-Plot/blob/main/PUN-Y-BCRD.MSMC2_pretty_plot.png)
 
 ### Two individuals/comparison plot
 With this script, it will automatically get the name of the population/species in the plot based on the filename. It will remove the `.txt` extension and assume the rest is the name you want to use in the plot.
